@@ -1,5 +1,5 @@
 var i = 0;
-var txt = 'Lets Play Battleship! What`s your name?'; /* The text */
+var txt = "Lets Play Battleship! What's your name?"; /* The text */
 var speed = 30; /* The speed/duration of the effect in milliseconds */
 
 export default function typeWriter() {
