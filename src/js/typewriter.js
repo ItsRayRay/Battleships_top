@@ -63,12 +63,8 @@ function getPlayerName() {
   return name
 } 
 
-
-
 a.addEventListener("click", function() {
   modal.style.display = "none";
   typeWriter();
 })
 
-
-//modal.style.display = "none";

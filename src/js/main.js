@@ -6,7 +6,6 @@ import typeWriter from "./typewriter.js";
 import Selectplacement from "./Selectplacement.js";
 
 typeWriter();
-Selectplacement();
 
 
 const carrier = new ship("Carrier", 5, [], false);
@@ -22,4 +21,29 @@ const mapPlayerTwo = new Map(10);
 const playerOne = new player("Player One", mapPlayerOne, allShips, true);
 const playerTwo = new player("Player Two", mapPlayerTwo, allShips, false);
 
+
+Selectplacement();
+
+
+const seaMap = document.createElement("div")
+
+
+
+mapPlayerOne.map.forEach(row => {
+    row.forEach(cell => {
+
+        console.log(cell);
+        cell = document.createElement("div");
+        cell.classList.add("cell");
+        cell.innerHTML = "🟦";
+        seaMap.classList.add("seaMap");
+        document.querySelector("#choosePlacement").appendChild(seaMap);
+        seaMap.appendChild(cell);
+
+    }   
+    )
+
+
+
+})
 

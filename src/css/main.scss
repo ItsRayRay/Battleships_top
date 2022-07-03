@@ -84,9 +84,23 @@ p {
 }
 
 #choosePlacement {
-    max-width: 80%;
+    max-width: 30%;
     margin: 0 auto;
     text-align: center;
     margin-top: 50px;
     min-height: 80vh;
+    
+}
+
+.cell {
+  font-size: 2.2em;
+  
+}
+
+.seaMap {
+  display: grid;
+  grid-template-columns: repeat(10, 40px);
+  grid-template-rows: repeat(10, 40px);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
 }

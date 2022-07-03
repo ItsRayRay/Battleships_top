@@ -1,5 +1,5 @@
 
-export default function Selectplacement() {
+export default function Selectplacement(map) {
 
     const body = document.querySelector("body");
     const choosePlacementContainer = document.createElement("div");
@@ -11,11 +11,19 @@ export default function Selectplacement() {
     choosePlacementTitle.innerHTML = "Drop your Ships";
     const choosePlacementInput = document.createElement("div");
     choosePlacementInput.classList.add("nes-input");
+    const startButton = document.createElement("a");
+    startButton.classList.add("nes-btn");
+    startButton.href = "#";
+    startButton.innerHTML = "Start Game";
+
 
     body.appendChild(choosePlacementContainer);
     choosePlacementContainer.appendChild(choosePlacementInner);
     choosePlacementInner.appendChild(choosePlacementTitle);
     choosePlacementInner.appendChild(choosePlacementInput);
+    choosePlacementInput.appendChild(startButton);
+
+
 
 }
 
