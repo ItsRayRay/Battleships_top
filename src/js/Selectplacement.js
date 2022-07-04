@@ -7,11 +7,6 @@ export default function Selectplacement(map) {
     const choosePlacementContainer = document.createElement("div");
     choosePlacementContainer.classList.add("nes-container", "is-rounded", "is-dark");
     choosePlacementContainer.id = "choosePlacement";
-
-   const selectBoatWrapper = document.createElement("div");
-    selectBoatWrapper.classList.add("nes-container", "is-rounded", "is-dark");
-    selectBoatWrapper.id = "selectBoatWrapper";
-
     const choosePlacementInner = document.createElement("div");
     choosePlacementInner.classList.add("nes-inner");
     const choosePlacementTitle = document.createElement("p");
@@ -29,13 +24,90 @@ export default function Selectplacement(map) {
     startButton.href = "#";
     startButton.innerHTML = "Start Game";
 
+    const seaMapContainer = document.createElement("div");
+    seaMapContainer.classList.add("nes-container", "is-rounded", "is-dark");
+    seaMapContainer.id = "seaMapContainer";
+
+
+    const boatSelector = document.createElement("div");
+    boatSelector.classList.add("nes-container", "is-rounded", "is-dark");
+    boatSelector.id = "boatSelector";
+
+
+
 
     body.appendChild(choosePlacementContainer);
     choosePlacementContainer.appendChild(choosePlacementInner);
     choosePlacementInner.appendChild(choosePlacementTitle);
     choosePlacementInner.appendChild(choosePlacementInput);
+
     choosePlacementInput.appendChild(startButton);
     choosePlacementInput.appendChild(rotateButton);
+    choosePlacementContainer.appendChild(boatSelector);
+
+
+
+    const wrapperCarrier = document.createElement("div");
+    const wrapperBattleship = document.createElement("div");
+    const wrapperCruiser = document.createElement("div");
+    const wrapperSubmarine = document.createElement("div");
+    const wrapperDestroyer = document.createElement("div");
+
+
+    const carrier = document.createElement("div");
+    const battleship = document.createElement("div");
+    const cruiser = document.createElement("div");
+    const submarine = document.createElement("div");
+    const destroyer = document.createElement("div");
+
+    const carrierBlocks = document.createElement("div");
+    const battleshipBlocks = document.createElement("div");
+    const cruiserBlocks = document.createElement("div");
+    const submarineBlocks = document.createElement("div");
+    const destroyerBlocks = document.createElement("div");
+
+    carrierBlocks.classList.add("blocks");
+    battleshipBlocks.classList.add("blocks");
+    cruiserBlocks.classList.add("blocks");
+    submarineBlocks.classList.add("blocks");
+    destroyerBlocks.classList.add("blocks");
+
+    carrierBlocks.innerText = "⬛⬛⬛⬛⬛";
+    battleshipBlocks.innerText = "⬛⬛⬛⬛";
+    cruiserBlocks.innerText = "⬛⬛⬛";
+    submarineBlocks.innerText = "⬛⬛⬛";
+    destroyerBlocks.innerText = "⬛⬛";
+
+
+    carrier.innerText = "Carrier ";
+    battleship.innerText = "Battleship";
+    cruiser.innerText = "Cruiser";
+    submarine.innerText = "Submarine";
+    destroyer.innerText = "Destroyer";
+
+    carrier.classList.add("boat");
+    battleship.classList.add("boat");
+    cruiser.classList.add("boat");
+    submarine.classList.add("boat");
+    destroyer.classList.add("boat");
+
+    boatSelector.appendChild(wrapperCarrier);
+    boatSelector.appendChild(wrapperBattleship);
+    boatSelector.appendChild(wrapperCruiser);
+    boatSelector.appendChild(wrapperSubmarine);
+    boatSelector.appendChild(wrapperDestroyer);
+    
+    wrapperCarrier.appendChild(carrier);
+    wrapperBattleship.appendChild(battleship);
+    wrapperCruiser.appendChild(cruiser);
+    wrapperSubmarine.appendChild(submarine);
+    wrapperDestroyer.appendChild(destroyer);
+
+    wrapperCarrier.appendChild(carrierBlocks);
+    wrapperBattleship.appendChild(battleshipBlocks);
+    wrapperCruiser.appendChild(cruiserBlocks);
+    wrapperSubmarine.appendChild(submarineBlocks);
+    wrapperDestroyer.appendChild(destroyerBlocks);
 
 }
 
