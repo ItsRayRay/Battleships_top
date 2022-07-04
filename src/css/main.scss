@@ -87,10 +87,10 @@ p {
     margin: 0 auto;
     text-align: center;
     margin-top: 1vh;
-    min-height: 75vh;
-    width: 30%;
+    min-height: 90vh;
+    width: 75%;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
 
@@ -114,15 +114,17 @@ p {
     margin: 0 auto;
     text-align: center;
     margin-top: 2vh;
-    min-height: 30vh;
-    width: 98%;
+    min-height: 40vh;
+    width: 75%;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
 .blocks {
   font-size: 2em;
-
+  margin : 0 auto;
+  padding: 0;
+  display: inline-block;
 }

@@ -34,8 +34,6 @@ export default function Selectplacement(map) {
     boatSelector.id = "boatSelector";
 
 
-
-
     body.appendChild(choosePlacementContainer);
     choosePlacementContainer.appendChild(choosePlacementInner);
     choosePlacementInner.appendChild(choosePlacementTitle);
@@ -72,11 +70,28 @@ export default function Selectplacement(map) {
     submarineBlocks.classList.add("blocks");
     destroyerBlocks.classList.add("blocks");
 
-    carrierBlocks.innerText = "⬛⬛⬛⬛⬛";
-    battleshipBlocks.innerText = "⬛⬛⬛⬛";
-    cruiserBlocks.innerText = "⬛⬛⬛";
-    submarineBlocks.innerText = "⬛⬛⬛";
-    destroyerBlocks.innerText = "⬛⬛";
+    carrierBlocks.innerHTML = `<span>⬛</span><span>⬛</span><span>⬛</span><span>⬛</span><span>⬛</span>`;
+    battleshipBlocks.innerHTML= `<span>⬛</span><span>⬛</span><span>⬛</span><span>⬛</span>`;
+    cruiserBlocks.innerHTML = `<span>⬛</span><span>⬛</span><span>⬛</span>`;
+    submarineBlocks.innerHTML = `<span>⬛</span><span>⬛</span><span>⬛</span>`;
+    destroyerBlocks.innerHTML = `<span>⬛</span><span>⬛</span>`;
+
+
+
+
+    carrierBlocks.style.display = "flex";
+    battleshipBlocks.style.display = "flex";
+    cruiserBlocks.style.display = "flex";
+    submarineBlocks.style.display = "flex";
+    destroyerBlocks.style.display = "flex";
+
+    
+
+    carrierBlocks.style.flexDirection = "row";
+    battleshipBlocks.style.flexDirection = "row";
+    cruiserBlocks.style.flexDirection = "row";
+    submarineBlocks.style.flexDirection = "row";
+    destroyerBlocks.style.flexDirection = "row";
 
 
     carrier.innerText = "Carrier ";
@@ -108,6 +123,28 @@ export default function Selectplacement(map) {
     wrapperCruiser.appendChild(cruiserBlocks);
     wrapperSubmarine.appendChild(submarineBlocks);
     wrapperDestroyer.appendChild(destroyerBlocks);
+
+    rotateButton.addEventListener("click", () => {
+
+        if (carrierBlocks.style.flexDirection === "row" && battleshipBlocks.style.flexDirection === "row" && cruiserBlocks.style.flexDirection === "row" && submarineBlocks.style.flexDirection === "row" && destroyerBlocks.style.flexDirection === "row") {
+        
+            carrierBlocks.style.flexDirection = "column";
+            battleshipBlocks.style.flexDirection = "column";
+            cruiserBlocks.style.flexDirection = "column";
+            submarineBlocks.style.flexDirection = "column";
+            destroyerBlocks.style.flexDirection = "column";
+        }
+        else {
+            carrierBlocks.style.flexDirection = "row";
+            battleshipBlocks.style.flexDirection = "row";
+            cruiserBlocks.style.flexDirection = "row";
+            submarineBlocks.style.flexDirection = "row";
+            destroyerBlocks.style.flexDirection = "row";
+        }
+        
+
+    })
+
 
 }
 
