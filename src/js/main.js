@@ -20,9 +20,25 @@ const playerTwo = new player("Player Two", mapPlayerTwo, allShips, false);
 
 
 
+
+
 const seaMap = document.createElement("div");
 
+
+document.querySelector("#startButton").addEventListener("click", function () {
+    document.querySelector("#startButton").style.display = "none";
+   const choosePlacement =   document.querySelector("#choosePlacement")
+    choosePlacement.style.display = "flex";
+   const blocks =   document.querySelector(".blocks")
+   blocks.style.marginTop = "0";
+   blocks.style.marginBottom = "0";
+
+    
+
+})
+
 typeWriter();
+
 Selectplacement();
 
 
@@ -81,9 +97,7 @@ for (let i = 0; i < playerMap.length; i++) {
 
 
   // add event listiener for each cell that listens for a click and console logs the cell id
-    seaMap.addEventListener("click", function (e) {
-
-
+    seaMap.addEventListener("click", function (e) {Carrier
         let cellId = e.target.id;
         console.log( cellId );
 

@@ -39,10 +39,6 @@ body {
     margin: 0 auto;
 }
 
-#modal {
-    margin-top: 40vh;
-   // visibility: hidden;
-}
 
 p {
     font-size: 1em;
@@ -81,20 +77,44 @@ p {
 
 #startscreen {
     margin-top: 200px;
-}
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} 
 
 #choosePlacement {
     margin: 0 auto;
     text-align: center;
-    margin-top: 1vh;
-    min-height: 90vh;
-    width: 75%;
-    display: flex;
+    margin-top: 20px;
+    min-height: fit-content;
+    width: fit-content;
+    display: none;
     flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
+ 
+}
 
-    
+@media screen and (max-width: 600px) {
+    #choosePlacement {
+        width: fit-content;
+        margin: 0 auto;
+        text-align: center;
+        margin-top: 1vh;
+        min-height: fit-content;
+        display: none;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+
+        #boatSelector {
+            width: fit-content;
+            
+        }
+
+
+    }
 }
 
 .cell {
@@ -114,17 +134,34 @@ p {
     margin: 0 auto;
     text-align: center;
     margin-top: 2vh;
-    min-height: 40vh;
-    width: 75%;
+    height: fit-content;;
+    width: fit-content;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 .blocks {
   font-size: 2em;
   margin : 0 auto;
   padding: 0;
-  display: inline-block;
+  line-height: normal;
+}
+
+
+#inputstartscreen {
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 2vh;
+    height: fit-content;;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+    margin-right: 50px;
 }
