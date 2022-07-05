@@ -87,11 +87,33 @@ document
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 seaMap.addEventListener("click", function (e) {
   let cellId = e.target.id;
   console.log(cellId);
  let setBoats = [carrier, battleship, cruiser, submarine, destroyer];
-
 
   let cellIdArray = cellId.split(",");
   let row = cellIdArray[0];
@@ -100,89 +122,41 @@ seaMap.addEventListener("click", function (e) {
   let colInt = parseInt(col);
   let cellTile = e.target.innerHTML;
 
-  console.log(typeof(setBoats[0]))
-
   let vertOrHoriz = document.querySelector("#rotateButton").innerHTML;
 
-
-
-  if ( carrier.isPlaced === false ||  vertOrHoriz === "vertical"  || cellId === "0,0" ||
-    cellId === "0,1" ||
-    cellId === "0,2" ||
-    cellId === "0,3" ||
-    cellId === "0,4" ||
-    cellId === "0,5" ||
-    cellId === "1,0" ||
-    cellId === "1,1" ||
-    cellId === "1,2" ||
-    cellId === "1,3" ||
-    cellId === "1,4" ||
-    cellId === "1,5" ||
-    cellId === "2,0" ||
-    cellId === "2,1" ||
-    cellId === "2,2" ||
-    cellId === "2,3" ||
-    cellId === "2,4" ||
-    cellId === "2,5" ||
-    cellId === "3,0" ||
-    cellId === "3,1" ||
-    cellId === "3,2" ||
-    cellId === "3,3" ||
-    cellId === "3,4" ||
-    cellId === "3,5" ||
-    cellId === "4,0" ||
-    cellId === "4,1" ||
-    cellId === "4,2" ||
-    cellId === "4,3" ||
-    cellId === "4,4" ||
-    cellId === "4,5" ||
-    cellId === "5,0" ||
-    cellId === "5,1" ||
-    cellId === "5,2" ||
-    cellId === "5,3" ||
-    cellId === "5,4" ||
-    cellId === "5,5" ||
-    cellId === "6,0" ||
-    cellId === "6,1" ||
-    cellId === "6,2" ||
-    cellId === "6,3" ||
-    cellId === "6,4" ||
-    cellId === "6,5" ||
-    cellId === "7,0" ||
-    cellId === "7,1" ||
-    cellId === "7,2" ||
-    cellId === "7,3" ||
-    cellId === "7,4" ||
-    cellId === "7,5" ||
-    cellId === "8,0" ||
-    cellId === "8,1" ||
-    cellId === "8,2" ||
-    cellId === "8,3" ||
-    cellId === "8,4" ||
-    cellId === "8,5" ||
-    cellId === "9,0" ||
-    cellId === "9,1" ||
-    cellId === "9,2" ||
-    cellId === "9,3" ||
-    cellId === "9,4" ||
-    cellId === "9,5"
+  if ( carrier.isPlaced === false
   ) {
     playerOne.placeShip(mapPlayerOne, setBoats[0], rowInt, colInt, vertOrHoriz);
     e.target.innerHTML = "⬛";
     carrier.isPlaced = true;
     console.log(carrier.isPlaced);
-    
-  } else if (
-    setBoats.length === 4 )
-  {
+  } else if ( battleship.isPlaced === false)  {
     playerOne.placeShip(mapPlayerOne, setBoats[1], rowInt, colInt, vertOrHoriz);
     e.target.innerHTML = "⬛";
+    battleship.isPlaced = true;
     renderMap();
-    setBoats.pop();
+    console.log(setBoats)
+  } else if ( cruiser.isPlaced === false) {
+    playerOne.placeShip(mapPlayerOne, setBoats[2], rowInt, colInt, vertOrHoriz);
+    e.target.innerHTML = "⬛";
+    cruiser.isPlaced = true;
+    renderMap();
     console.log(setBoats)
   }
-
-
+  else if ( submarine.isPlaced === false) {
+    playerOne.placeShip(mapPlayerOne, setBoats[3], rowInt, colInt, vertOrHoriz);
+    e.target.innerHTML = "⬛";
+    submarine.isPlaced = true;
+    renderMap();
+    console.log(setBoats)
+  }
+  else if ( destroyer.isPlaced === false) {
+    playerOne.placeShip(mapPlayerOne, setBoats[4], rowInt, colInt, vertOrHoriz);
+    e.target.innerHTML = "⬛";
+    destroyer.isPlaced = true;
+    renderMap();
+    console.log(setBoats)
+  }
 
 });
 
