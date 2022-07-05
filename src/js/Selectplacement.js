@@ -15,6 +15,9 @@ export default function Selectplacement(map) {
     choosePlacementInput.classList.add("nes-input");
     const startButton = document.createElement("a");
     const rotateButton = document.createElement("a");
+    const resetButton = document.createElement("a");
+    resetButton.innerHTML = "Reset";
+    resetButton.classList.add("nes-btn", "is-error");
     rotateButton.innerHTML = "horizontal";
     rotateButton.classList.add("nes-btn", "is-primary");
     rotateButton.id = "rotateButton";
@@ -41,15 +44,27 @@ export default function Selectplacement(map) {
 
     choosePlacementInput.appendChild(startButton);
     choosePlacementInput.appendChild(rotateButton);
+    choosePlacementInput.appendChild(resetButton);
     choosePlacementContainer.appendChild(boatSelector);
 
 
 
     const wrapperCarrier = document.createElement("div");
+    wrapperCarrier.classList.add("wrapper");
+    wrapperCarrier.id = "carrier";
     const wrapperBattleship = document.createElement("div");
+    
+    wrapperBattleship.classList.add("wrapper");
+    wrapperBattleship.id = "battleship";
     const wrapperCruiser = document.createElement("div");
+    wrapperCruiser.classList.add("wrapper");
+    wrapperCruiser.id = "cruiser";
     const wrapperSubmarine = document.createElement("div");
+    wrapperSubmarine.classList.add("wrapper");
+    wrapperSubmarine.id = "submarine";
     const wrapperDestroyer = document.createElement("div");
+    wrapperDestroyer.classList.add("wrapper");
+    wrapperDestroyer.id = "destroyer";
 
 
     const carrier = document.createElement("div");
@@ -143,6 +158,10 @@ export default function Selectplacement(map) {
         }
         
 
+    })
+
+    resetButton.addEventListener("click", () => {
+        location.reload();
     })
 
 
