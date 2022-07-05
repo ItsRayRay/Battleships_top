@@ -15,10 +15,10 @@ export default function Selectplacement(map) {
     choosePlacementInput.classList.add("nes-input");
     const startButton = document.createElement("a");
     const rotateButton = document.createElement("a");
-    rotateButton.innerHTML = "Rotate";
+    rotateButton.innerHTML = "horizontal";
     rotateButton.classList.add("nes-btn", "is-primary");
     rotateButton.id = "rotateButton";
-    rotateButton.href = "#";
+    rotateButton.href = "horizontal";
 
     startButton.classList.add("nes-btn");
     startButton.href = "#";

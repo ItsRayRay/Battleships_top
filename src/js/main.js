@@ -11,77 +11,51 @@ const cruiser = new ship("Cruiser", 3, [], false);
 const submarine = new ship("Submarine", 3, [], false);
 const destroyer = new ship("Destroyer", 2, [], false);
 const allShips = [carrier, battleship, cruiser, submarine, destroyer];
-
 const mapPlayerOne = new Map(10);
 const mapPlayerTwo = new Map(10);
-
 const playerOne = new player("Player One", mapPlayerOne, allShips, true);
 const playerTwo = new player("Player Two", mapPlayerTwo, allShips, false);
-
-
-
-
-
 const seaMap = document.createElement("div");
 
-
 document.querySelector("#startButton").addEventListener("click", function () {
-    document.querySelector("#startButton").style.display = "none";
-   const choosePlacement =   document.querySelector("#choosePlacement")
-    choosePlacement.style.display = "flex";
-   const blocks =   document.querySelector(".blocks")
-   blocks.style.marginTop = "0";
-   blocks.style.marginBottom = "0";
-
-    
-
-})
+  document.querySelector("#startButton").style.display = "none";
+  const choosePlacement = document.querySelector("#choosePlacement");
+  choosePlacement.style.display = "flex";
+  const blocks = document.querySelector(".blocks");
+  blocks.style.marginTop = "0";
+  blocks.style.marginBottom = "0";
+});
 
 typeWriter();
-
 Selectplacement();
 
-
-
-
 function placeShips(dataPlayer) {
+  const playerMap = mapPlayerOne.map;
 
-
-const playerMap = mapPlayerOne.map;
-
-for (let i = 0; i < playerMap.length; i++) {
-  for (let j = 0; j < playerMap[i].length; j++) {
-    const cell = document.createElement("div");
-    cell.classList.add("cell");
-    cell.id = `${i},${j}`;
-    cell.innerHTML = "🟦";
-    seaMap.classList.add("seaMap");
-    document.querySelector("#choosePlacement").appendChild(seaMap);
-    seaMap.appendChild(cell);
+  for (let i = 0; i < playerMap.length; i++) {
+    for (let j = 0; j < playerMap[i].length; j++) {
+      const cell = document.createElement("div");
+      cell.classList.add("cell");
+      cell.id = `${i},${j}`;
+      cell.innerHTML = "🟦";
+      seaMap.classList.add("seaMap");
+      document.querySelector("#choosePlacement").appendChild(seaMap);
+      seaMap.appendChild(cell);
     }
-    }
-
-
-
-
-    
+  }
 
   //add an event listener for each cell that listens for a click and changes color with hover
   seaMap.addEventListener("click", function (e) {
     if (e.target.innerHTML === "🟧") {
       e.target.innerHTML = "⬛";
-      
     }
   });
 
   seaMap.addEventListener("mouseover", function (e) {
     if (e.target.innerHTML === "🟦") {
       e.target.innerHTML = "🟧";
-        
     }
   });
-
-
 
   seaMap.addEventListener("mouseout", function (e) {
     if (e.target.innerHTML === "🟧") {
@@ -89,36 +63,51 @@ for (let i = 0; i < playerMap.length; i++) {
     }
   });
 
+  // map the array out on the screen and replace it with
+  // the ship's length and the ship's name
 
 
-
-
-
-
+  document.querySelector("#rotateButton").addEventListener("click", function (event) {
+    event.preventDefault();
+    const rotate = document.querySelector("#rotateButton");
+    if (rotate.innerHTML === "horizontal") {
+      rotate.innerHTML = "vertical";
+    } else {
+      rotate.innerHTML = "horizontal";
+    }
+  });
 
   // add event listiener for each cell that listens for a click and console logs the cell id
-    seaMap.addEventListener("click", function (e) {Carrier
-        let cellId = e.target.id;
-        console.log( cellId );
+  seaMap.addEventListener("click", function (e) {
+    let cellId = e.target.id;
+    console.log(cellId);
 
-        let cellIdArray = cellId.split(",");
-        let row = cellIdArray[0];
-        let col = cellIdArray[1];
-        let rowInt = parseInt(row);
-        let colInt = parseInt(col);
+    let cellIdArray = cellId.split(",");
+    let row = cellIdArray[0];
+    let col = cellIdArray[1];
+    let rowInt = parseInt(row);
+    let colInt = parseInt(col);
 
-        playerOne.placeShip(mapPlayerOne, carrier, rowInt, colInt, "vertical");
-        console.log(mapPlayerOne.map);
-        let mapUpdate = mapPlayerOne.map;
+    let vertOrHoriz = document.querySelector("#rotateButton").innerHTML;
+    
+    playerOne.placeShip(mapPlayerOne, carrier, rowInt, colInt, vertOrHoriz);
+    let mapUpdate = mapPlayerOne.map;
 
 
+    seaMap.textContent = "";
+    // render mapUpdate to the screen
+    for (let i = 0; i < mapUpdate.length; i++) {
+      for (let j = 0; j < mapUpdate[i].length; j++) {
+        const cell = document.createElement("div");
+        cell.classList.add("cell");
+        cell.id = `${i},${j}`;
+        cell.innerHTML = mapUpdate[i][j];
+        seaMap.classList.add("seaMap");
+        document.querySelector("#choosePlacement").appendChild(seaMap);
+        seaMap.appendChild(cell);
+      }
     }
-
-
-
-    );
-
-
+  });
 
 
   const allShipSizes = dataPlayer.ships.map((ship) => ship.size);
@@ -127,12 +116,6 @@ for (let i = 0; i < playerMap.length; i++) {
   const shipSize3Cruiser = allShipSizes[2];
   const shipSize3SubMarine = allShipSizes[3];
   const shipSize2Destroyer = allShipSizes[4];
-
-
-
-
-
-
 }
 
 placeShips(playerOne);
@@ -142,9 +125,7 @@ placeShips(playerOne);
 // playerOne.attack(mapPlayerTwo, 1,0);
 // playerTwo.attack(mapPlayerOne, 0,0);
 
-
 // playerOne.placeShip(mapPlayerOne, carrier, 0, 0, "horizontal");
- console.log(mapPlayerOne.map);
-
+console.log(mapPlayerOne.map);
 
 // console.log(mapPlayerTwo.map);
