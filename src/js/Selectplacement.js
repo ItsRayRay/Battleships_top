@@ -9,11 +9,11 @@ export default function Selectplacement(map) {
     choosePlacementContainer.id = "choosePlacement";
     const choosePlacementInner = document.createElement("div");
     choosePlacementInner.classList.add("nes-inner");
-    const choosePlacementTitle = document.createElement("p");
-    choosePlacementTitle.innerHTML = "Drop your Ships ";
+    const choosePlacementTitle = document.createElement("p")
+    choosePlacementTitle.id= "dropshiptext";
+    choosePlacementTitle.innerHTML = "Drop your Ships! ";
     const choosePlacementInput = document.createElement("div");
     choosePlacementInput.classList.add("nes-input");
-    const startButton = document.createElement("a");
     const rotateButton = document.createElement("a");
     const resetButton = document.createElement("a");
     resetButton.innerHTML = "Reset";
@@ -23,9 +23,17 @@ export default function Selectplacement(map) {
     rotateButton.id = "rotateButton";
     rotateButton.href = "horizontal";
 
+
+    const startButton = document.createElement("a");
     startButton.classList.add("nes-btn");
+    startButton.id = "startButton2";
     startButton.href = "#";
     startButton.innerHTML = "Start Game";
+    choosePlacementInput.appendChild(startButton);
+
+
+
+
 
     const seaMapContainer = document.createElement("div");
     seaMapContainer.classList.add("nes-container", "is-rounded", "is-dark");
@@ -41,8 +49,6 @@ export default function Selectplacement(map) {
     choosePlacementContainer.appendChild(choosePlacementInner);
     choosePlacementInner.appendChild(choosePlacementTitle);
     choosePlacementInner.appendChild(choosePlacementInput);
-
-    choosePlacementInput.appendChild(startButton);
     choosePlacementInput.appendChild(rotateButton);
     choosePlacementInput.appendChild(resetButton);
     choosePlacementContainer.appendChild(boatSelector);
@@ -64,7 +70,6 @@ export default function Selectplacement(map) {
     wrapperSubmarine.id = "submarine";
     const wrapperDestroyer = document.createElement("div");
     wrapperDestroyer.classList.add("wrapper");
-    wrapperDestroyer.id = "destroyer";
 
 
     const carrier = document.createElement("div");
