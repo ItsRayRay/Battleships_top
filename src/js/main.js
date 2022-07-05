@@ -5,17 +5,19 @@ import player from "./player.js";
 import typeWriter from "./typewriter.js";
 import Selectplacement from "./Selectplacement.js";
 
-const carrier = new ship("Carrier", 5, [], false);
-const battleship = new ship("Battleship", 4, [], false);
-const cruiser = new ship("Cruiser", 3, [], false);
-const submarine = new ship("Submarine", 3, [], false);
-const destroyer = new ship("Destroyer", 2, [], false);
+const carrier = new ship("Carrier", 5, [], false, false);
+const battleship = new ship("Battleship", 4, [], false, false);
+const cruiser = new ship("Cruiser", 3, [], false, false);
+const submarine = new ship("Submarine", 3, [], false , false);
+const destroyer = new ship("Destroyer", 2, [], false, false);
 const allShips = [carrier, battleship, cruiser, submarine, destroyer];
 const mapPlayerOne = new Map(10);
 const mapPlayerTwo = new Map(10);
 const playerOne = new player("Player One", mapPlayerOne, allShips, true);
 const playerTwo = new player("Player Two", mapPlayerTwo, allShips, false);
 const seaMap = document.createElement("div");
+
+console.log(battleship)
 
 document.querySelector("#startButton").addEventListener("click", function () {
   document.querySelector("#startButton").style.display = "none";
@@ -34,9 +36,7 @@ Selectplacement();
 
 function renderMap() {
   let mapUpdate = mapPlayerOne.map;
-  console.log(mapUpdate);
   seaMap.textContent = "";
-  
   for (let i = 0; i < mapUpdate.length; i++) {
     for (let j = 0; j < mapUpdate[i].length; j++) {
       const cell = document.createElement("div");
@@ -87,11 +87,11 @@ document
 
 
 
-
-
 seaMap.addEventListener("click", function (e) {
   let cellId = e.target.id;
   console.log(cellId);
+ let setBoats = [carrier, battleship, cruiser, submarine, destroyer];
+
 
   let cellIdArray = cellId.split(",");
   let row = cellIdArray[0];
@@ -100,9 +100,13 @@ seaMap.addEventListener("click", function (e) {
   let colInt = parseInt(col);
   let cellTile = e.target.innerHTML;
 
+  console.log(typeof(setBoats[0]))
+
   let vertOrHoriz = document.querySelector("#rotateButton").innerHTML;
 
-  if (  vertOrHoriz === "vertical"  || cellId === "0,0" ||
+
+
+  if ( carrier.isPlaced === false ||  vertOrHoriz === "vertical"  || cellId === "0,0" ||
     cellId === "0,1" ||
     cellId === "0,2" ||
     cellId === "0,3" ||
@@ -163,10 +167,22 @@ seaMap.addEventListener("click", function (e) {
     cellId === "9,4" ||
     cellId === "9,5"
   ) {
-    playerOne.placeShip(mapPlayerOne, carrier, rowInt, colInt, vertOrHoriz);
+    playerOne.placeShip(mapPlayerOne, setBoats[0], rowInt, colInt, vertOrHoriz);
     e.target.innerHTML = "⬛";
+    carrier.isPlaced = true;
+    console.log(carrier.isPlaced);
     
+  } else if (
+    setBoats.length === 4 )
+  {
+    playerOne.placeShip(mapPlayerOne, setBoats[1], rowInt, colInt, vertOrHoriz);
+    e.target.innerHTML = "⬛";
+    renderMap();
+    setBoats.pop();
+    console.log(setBoats)
   }
+
+
 
 });
 
