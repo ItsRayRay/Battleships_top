@@ -30,5 +30,20 @@ export default class Player {
             }
         }
 
+        placeShipPc = (map, ship, x, y, direction) => {
+            if (direction === "horizontal" ) {
+                for (let i = 0; i < ship.size; i++) {
+
+                    map.map[x][y + i] = `<p>🟦&#8205;</p>`;
+                   
+                } 
+            } else {
+                for (let i = 0; i < ship.size; i++) {
+                    map.map[x + i][y] = ` <p>🟦&#8205;</p>`;
+                   
+                }
+            }
+        }
+
     }
 

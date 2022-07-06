@@ -113,16 +113,56 @@ p {
             
         }
 
+        #battleBoardInput{
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          margin: 0 auto;
+          margin-top: 2vh;
+      
+      }
+
 
     }
+
+    #battleBoardInput {
+        width: fit-content;
+        margin: 0 auto;
+        text-align: center;
+        margin-top: 1vh;
+        min-height: fit-content;
+        display: none;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .nes-input {
+      width: fit-content;
+      margin: 0 auto;
+      text-align: center;
+      margin-top: 2vh;
+      height: fit-content;
+      display: flex;
+      flex-direction: row;
+  }
 }
 
 .cell {
-  font-size: 2em;
+  font-size: 2.2em;
   
 }
 
 .seaMap {
+  display: grid;
+  grid-template-columns: repeat(10, 40px);
+  grid-template-rows: repeat(10, 40px);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.seaMap2 {
   display: grid;
   grid-template-columns: repeat(10, 40px);
   grid-template-rows: repeat(10, 40px);
@@ -145,10 +185,11 @@ p {
 }
 
 .blocks {
-  font-size: 2em;
+  font-size: 2.2em;
   margin : 0 auto;
   padding: 0;
   line-height: normal;
+
 }
 
 
@@ -182,12 +223,37 @@ p {
     width: fit-content;
 }
 
+.nes-input {
+    width: fit-content;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 2vh;
+    height: fit-content;
+    display: flex;
+}
+
 #battleBoardInput{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
     margin-top: 2vh;
 
 }
+
+#battleBoardTitle {
+    font-size: 1.5em;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 2vh;
+    height: fit-content;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+

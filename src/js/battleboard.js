@@ -10,8 +10,8 @@ export default function renderBattleBoard() {
     battleBoardTitle.id = "battleBoardTitle";
     battleBoardTitle.innerHTML = "Battle Board";
     const battleBoardInput = document.createElement("div");
+    battleBoardInput.id = "battleBoardInput";
     battleBoardInput.classList.add("nes-input");
-
 
     const seaMapContainer = document.createElement("div");
     seaMapContainer.classList.add("nes-container", "is-rounded", "is-dark");
@@ -21,18 +21,12 @@ export default function renderBattleBoard() {
     seaMapContainerComputer.classList.add("nes-container", "is-rounded", "is-dark");
     seaMapContainerComputer.id = "seaMapContainerComputer";
 
-
-
-        
     body.appendChild(battleBoardContainer);
     battleBoardContainer.appendChild(battleBoardInner);
     battleBoardInner.appendChild(battleBoardTitle);
     battleBoardInner.appendChild(battleBoardInput);
     battleBoardInput.appendChild(seaMapContainer);
     battleBoardInput.appendChild(seaMapContainerComputer);
-
-
-
 
 
     }

@@ -19,8 +19,14 @@ const playerTwo = new player("Player Two", mapPlayerTwo, allShips, false);
 const seaMap = document.createElement("div");
 const seaMap2 = document.createElement("div");
 
+let gameStart = [false]
 
-console.log(battleship)
+
+//fix delay when placing the ship need to find a good reference for the if statement to run this correctly
+// fix the array overflow when placing a ship
+
+
+
 
 document.querySelector("#startButton").addEventListener("click", function () {
   document.querySelector("#startButton").style.display = "none";
@@ -33,8 +39,7 @@ document.querySelector("#startButton").addEventListener("click", function () {
 
 typeWriter();
 Selectplacement();
-
- renderMap()
+renderMap()
 
 
 function renderMap() {
@@ -51,31 +56,10 @@ function renderMap() {
       seaMap.appendChild(cell);
     }
   }
+
+
 }
 
-
-seaMap.addEventListener("click", function (e) {
-  if (e.target.innerHTML === "🟧") {
-    e.target.innerHTML = "⬛";
-  }
-});
-
-seaMap.addEventListener("mouseover", function (e) {
-  
-  if (e.target.innerHTML === "🟦") {
-    e.target.innerHTML = "🟧";
-    
-    console.log(e.target.id)
-  }
-});
-
-seaMap.addEventListener("mouseout", function (e) {
-
-renderMap()
-  if (e.target.innerHTML === "🟧") {
-    e.target.innerHTML = "🟦";
-  }
-});
 
 
 document
@@ -92,7 +76,9 @@ document
 
 
 
+
 seaMap.addEventListener("click", function (e) {
+  
   let cellId = e.target.id;
   let cellIdArray = cellId.split(",");
   let row = cellIdArray[0];
@@ -106,52 +92,50 @@ seaMap.addEventListener("click", function (e) {
 
 
 
-  if ( carrier.isPlaced === false
+  if ( playerOne.ships[0].isPlaced === false
   ) {
-    playerOne.placeShip(mapPlayerOne, setBoats[0], rowInt, colInt, vertOrHoriz);
+    playerOne.placeShip(mapPlayerOne,   playerOne.ships[0], rowInt, colInt, vertOrHoriz);
     document.querySelector("#carrier").style.display = "none";
     e.target.innerHTML = "⬛";
-    carrier.isPlaced = true;
-    console.log(carrier.isPlaced);
-  } else if ( battleship.isPlaced === false)  {
-    playerOne.placeShip(mapPlayerOne, setBoats[1], rowInt, colInt, vertOrHoriz);
+    playerOne.ships[0].isPlaced = true;
+    console.log(  playerOne.ships[0].isPlaced);
+  } else if ( playerOne.ships[1].isPlaced === false)  {
+    playerOne.placeShip(mapPlayerOne, playerOne.ships[1], rowInt, colInt, vertOrHoriz);
     document.querySelector("#battleship").style.display = "none";
     e.target.innerHTML = "⬛";
-    battleship.isPlaced = true;
+    playerOne.ships[1].isPlaced = true;
     renderMap();
     console.log(setBoats)
-  } else if ( cruiser.isPlaced === false) {
-    playerOne.placeShip(mapPlayerOne, setBoats[2], rowInt, colInt, vertOrHoriz);
+  } else if (   playerOne.ships[2].isPlaced === false) {
+    playerOne.placeShip(mapPlayerOne,   playerOne.ships[2], rowInt, colInt, vertOrHoriz);
     document.querySelector("#cruiser").style.display = "none";
     e.target.innerHTML = "⬛";
-    cruiser.isPlaced = true;
+    playerOne.ships[2].isPlaced = true;
     renderMap();
     console.log(setBoats)
   }
-  else if ( submarine.isPlaced === false) {
-    playerOne.placeShip(mapPlayerOne, setBoats[3], rowInt, colInt, vertOrHoriz);
+  else if (   playerOne.ships[3].isPlaced === false) {
+    playerOne.placeShip(mapPlayerOne,   playerOne.ships[3], rowInt, colInt, vertOrHoriz);
     document.querySelector("#submarine").style.display = "none";
     e.target.innerHTML = "⬛";
-    submarine.isPlaced = true;
+    playerOne.ships[3].isPlaced = true;
     renderMap();
     console.log(setBoats)
   }
 
-  else if ( destroyer.isPlaced === false) {
-    playerOne.placeShip(mapPlayerOne, setBoats[4], rowInt, colInt, vertOrHoriz);
+  else if (  playerOne.ships[4].isPlaced === false) {
+    playerOne.placeShip(mapPlayerOne,  playerOne.ships[4], rowInt, colInt, vertOrHoriz);
     document.querySelector("#boatSelector").style.display = "none";
     e.target.innerHTML = "⬛";
-    destroyer.isPlaced = true;
+    playerOne.ships[4].isPlaced = true;
     document.querySelector("#startButton2").style.display = "block";
     document.querySelector("#rotateButton").style.display = "none";
     document.querySelector("#dropshiptext").textContent = "Ready?"
     renderMap();
-
+    pcPlaceShips();
   }
 
 });
-
-
 
 
 document.querySelector("#startButton2").addEventListener("click", function () {
@@ -162,28 +146,114 @@ document.querySelector("#startButton2").addEventListener("click", function () {
   renderBattleBoard();
   renderBoardInContainer()
   renderPcBoardInContainer();
-
-
+  changeSeaMapClass ()
 }
 );
 
+
+function removeEventListeners() {
+  seaMap.removeEventListener("click", function (e) {
+    if (e.target.innerHTML === "🟧") {
+      e.target.innerHTML = "⬛";
+    }
+  });
+  seaMap.removeEventListener("mouseover", function (e) {
+    if (e.target.innerHTML === "🟦") {
+      e.target.innerHTML = "🟧";
+    }
+  });
+  seaMap.removeEventListener("mouseout", function (e) {
+    if (e.target.innerHTML === "🟧") {
+      e.target.innerHTML = "🟦";
+    }
+  });
+}
+
+
+function addEventListeners() {
+
+    if ( destroyer.isPlaced === true) {
+
+  seaMap.addEventListener("click", function (e) {
+    if (e.target.innerHTML === "🟧") {
+      e.target.innerHTML = "⬛";
+    }
+  });
+  
+  seaMap.addEventListener("mouseover", function (e) {
+    
+    if (e.target.innerHTML === "🟦") {
+      e.target.innerHTML = "🟧";
+      console.log(e.target.id)
+    }
+  });
+  
+  seaMap.addEventListener("mouseout", function (e) {
+  
+  renderMap()
+    if (e.target.innerHTML === "🟧") {
+      e.target.innerHTML = "🟦";
+    }
+  });
+}
+
+  
+  }
+ // addEventListeners();
+  
+
 function renderPcBoardInContainer() {
   let mapUpdate2 = mapPlayerTwo.map;
-
+  gameStart[1] = true;
+  removeEventListeners()
   console.log(mapUpdate2)
 
   for (let i = 0; i < mapUpdate2.length; i++) {
     for (let j = 0; j < mapUpdate2[i].length; j++) {
       const cell = document.createElement("div");
       cell.classList.add("cell");
-      cell.id = `${i},${j},computer`;
+      cell.id = `${i},${j}`;
       cell.innerHTML = mapUpdate2[i][j];
-      seaMap2.classList.add("seaMap");
+      seaMap2.classList.add("seaMap2");
       document.querySelector("#seaMapContainerComputer").appendChild(seaMap2);
       seaMap2.appendChild(cell);
     }
   }
 }
+
+seaMap2.addEventListener("click", function (e) {
+  if (e.target.innerHTML === "🟦") {
+    e.target.innerHTML = "🟧";
+    console.log(e.target.id)
+  }
+
+});
+
+seaMap2.addEventListener("mouseover", function (e) {
+  if (e.target.innerHTML === "🟦") {
+    e.target.innerHTML = "🟧";
+    console.log(e.target.id)
+  }
+}
+);
+
+seaMap2.addEventListener("mouseout", function (e) {
+  if (e.target.innerHTML === "🟧") {
+    e.target.innerHTML = "🟦";
+  }
+}
+);
+
+
+seaMap2.addEventListener("click", function (e) {
+  if (e.target.innerHTML !== "🟦" && e.target.innerHTML !== "🟧") {
+    e.target.innerHTML = "💣";//
+  } else {
+    e.target.innerHTML = "❌";
+  } if (e.target.innerHTML === "❌") {
+}
+);
+
 
 
 function renderBoardInContainer() {
@@ -201,6 +271,26 @@ function renderBoardInContainer() {
       seaMap.appendChild(cell);
     }
   }
+
+}
+
+
+
+playerTwo.placeShipPc(mapPlayerTwo, playerTwo.ships[0], 0, 1, "vertical" );
+playerTwo.placeShipPc(mapPlayerTwo, playerTwo.ships[1], 6, 6, "horizontal" );
+playerTwo.placeShipPc(mapPlayerTwo, playerTwo.ships[2], 1, 1, "vertical" );
+playerTwo.placeShipPc(mapPlayerTwo, playerTwo.ships[3],3, 2, "vertical" );
+playerTwo.placeShipPc(mapPlayerTwo, playerTwo.ships[4], 7, 7, "horizontal" );
+
+
+
+
+
+
+
+
+
+function pcPlaceShips() {
 
 
 }
