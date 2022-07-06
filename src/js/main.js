@@ -17,6 +17,8 @@ const mapPlayerTwo = new Map(10);
 const playerOne = new player("Player One", mapPlayerOne, allShips, true);
 const playerTwo = new player("Player Two", mapPlayerTwo, allShips, false);
 const seaMap = document.createElement("div");
+const seaMap2 = document.createElement("div");
+
 
 console.log(battleship)
 
@@ -62,6 +64,8 @@ seaMap.addEventListener("mouseover", function (e) {
   
   if (e.target.innerHTML === "🟦") {
     e.target.innerHTML = "🟧";
+    
+    console.log(e.target.id)
   }
 });
 
@@ -90,9 +94,6 @@ document
 
 seaMap.addEventListener("click", function (e) {
   let cellId = e.target.id;
-  console.log(cellId);
- let setBoats = [carrier, battleship, cruiser, submarine, destroyer];
-
   let cellIdArray = cellId.split(",");
   let row = cellIdArray[0];
   let col = cellIdArray[1];
@@ -101,6 +102,9 @@ seaMap.addEventListener("click", function (e) {
   let cellTile = e.target.innerHTML;
 
   let vertOrHoriz = document.querySelector("#rotateButton").innerHTML;
+  let setBoats = [carrier, battleship, cruiser, submarine, destroyer];
+
+
 
   if ( carrier.isPlaced === false
   ) {
@@ -148,14 +152,57 @@ seaMap.addEventListener("click", function (e) {
 });
 
 
+
+
 document.querySelector("#startButton2").addEventListener("click", function () {
   document.querySelector("#startButton2").style.display = "none";
   document.querySelector("#dropshiptext").textContent = "Drop!";
   document.querySelector("#choosePlacement").style.display = "none";
   renderMap();
   renderBattleBoard();
+  renderBoardInContainer()
+  renderPcBoardInContainer();
+
+
 }
 );
 
+function renderPcBoardInContainer() {
+  let mapUpdate2 = mapPlayerTwo.map;
+
+  console.log(mapUpdate2)
+
+  for (let i = 0; i < mapUpdate2.length; i++) {
+    for (let j = 0; j < mapUpdate2[i].length; j++) {
+      const cell = document.createElement("div");
+      cell.classList.add("cell");
+      cell.id = `${i},${j},computer`;
+      cell.innerHTML = mapUpdate2[i][j];
+      seaMap2.classList.add("seaMap");
+      document.querySelector("#seaMapContainerComputer").appendChild(seaMap2);
+      seaMap2.appendChild(cell);
+    }
+  }
+}
+
+
+function renderBoardInContainer() {
+  let mapUpdate = mapPlayerOne.map;
+  seaMap.textContent = "";
+
+  for (let i = 0; i < mapUpdate.length; i++) {
+    for (let j = 0; j < mapUpdate[i].length; j++) {
+      const cell = document.createElement("div");
+      cell.classList.add("cell");
+      cell.id = `${i},${j}`;
+      cell.innerHTML = mapUpdate[i][j];
+      seaMap.classList.add("seaMap");
+      document.querySelector("#seaMapContainer").appendChild(seaMap);
+      seaMap.appendChild(cell);
+    }
+  }
+
+
+}
 
 
