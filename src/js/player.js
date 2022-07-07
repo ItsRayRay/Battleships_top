@@ -6,13 +6,13 @@ export default class Player {
         this.name = name;
         this.map = map;
         this.ships = ships;
-        this.turn = turn;
+        this.turn = true
     }
         attack = (map, x, y) => {
-            if (map.map[x][y] === "🟦" || map.map[x][y] === "⬛") {
-                map.map[x][y] = '🟥';
-            } else {
-                return false;
+            if (map.map[x][y] === "🟦" ) {
+                map.map[x][y] = '🟧';
+            } else if (map.map[x][y] === "⬛") {
+                map.map[x][y] = "💣";
             }
         }
 
@@ -46,4 +46,6 @@ export default class Player {
         }
 
     }
+
+
 

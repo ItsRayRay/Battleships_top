@@ -1,4 +1,4 @@
-import _, { ceil, indexOf } from "lodash";
+import _, { ceil, indexOf, once } from "lodash";
 import ship from "./ship.js";
 import Map from "./map.js";
 import player from "./player.js";
@@ -14,17 +14,23 @@ const destroyer = new ship("Destroyer", 2, [], false, false);
 const allShips = [carrier, battleship, cruiser, submarine, destroyer];
 const mapPlayerOne = new Map(10);
 const mapPlayerTwo = new Map(10);
-const playerOne = new player("Player One", mapPlayerOne, allShips, true);
-const playerTwo = new player("Player Two", mapPlayerTwo, allShips, false);
+const playerOne = new player("Player One", mapPlayerOne, allShips);
+const playerTwo = new player("Player Two", mapPlayerTwo, allShips);
 const seaMap = document.createElement("div");
 const seaMap2 = document.createElement("div");
 
 let gameStart = [false]
 
-
 //fix delay when placing the ship need to find a good reference for the if statement to run this correctly
 // fix the array overflow when placing a ship
+// setup turns for the game
 
+// create a function for everything and use callbacks to run the functions
+// create a function to render the board
+// create a function to place ship
+// create a function to attack
+// create a function to check if the game is over
+// add these functions into the classes where they belong 
 
 
 
@@ -59,8 +65,6 @@ function renderMap() {
 
 
 }
-
-
 
 document
 .querySelector("#rotateButton")
@@ -98,21 +102,21 @@ seaMap.addEventListener("click", function (e) {
     document.querySelector("#carrier").style.display = "none";
     e.target.innerHTML = "⬛";
     playerOne.ships[0].isPlaced = true;
-    console.log(  playerOne.ships[0].isPlaced);
+  ;
   } else if ( playerOne.ships[1].isPlaced === false)  {
     playerOne.placeShip(mapPlayerOne, playerOne.ships[1], rowInt, colInt, vertOrHoriz);
     document.querySelector("#battleship").style.display = "none";
     e.target.innerHTML = "⬛";
     playerOne.ships[1].isPlaced = true;
     renderMap();
-    console.log(setBoats)
+  
   } else if (   playerOne.ships[2].isPlaced === false) {
     playerOne.placeShip(mapPlayerOne,   playerOne.ships[2], rowInt, colInt, vertOrHoriz);
     document.querySelector("#cruiser").style.display = "none";
     e.target.innerHTML = "⬛";
     playerOne.ships[2].isPlaced = true;
     renderMap();
-    console.log(setBoats)
+
   }
   else if (   playerOne.ships[3].isPlaced === false) {
     playerOne.placeShip(mapPlayerOne,   playerOne.ships[3], rowInt, colInt, vertOrHoriz);
@@ -120,7 +124,7 @@ seaMap.addEventListener("click", function (e) {
     e.target.innerHTML = "⬛";
     playerOne.ships[3].isPlaced = true;
     renderMap();
-    console.log(setBoats)
+
   }
 
   else if (  playerOne.ships[4].isPlaced === false) {
@@ -133,6 +137,7 @@ seaMap.addEventListener("click", function (e) {
     document.querySelector("#dropshiptext").textContent = "Ready?"
     renderMap();
     pcPlaceShips();
+    
   }
 
 });
@@ -147,9 +152,9 @@ document.querySelector("#startButton2").addEventListener("click", function () {
   renderBoardInContainer()
   renderPcBoardInContainer();
   changeSeaMapClass ()
+  
 }
 );
-
 
 function removeEventListeners() {
   seaMap.removeEventListener("click", function (e) {
@@ -170,44 +175,10 @@ function removeEventListeners() {
 }
 
 
-function addEventListeners() {
-
-    if ( destroyer.isPlaced === true) {
-
-  seaMap.addEventListener("click", function (e) {
-    if (e.target.innerHTML === "🟧") {
-      e.target.innerHTML = "⬛";
-    }
-  });
-  
-  seaMap.addEventListener("mouseover", function (e) {
-    
-    if (e.target.innerHTML === "🟦") {
-      e.target.innerHTML = "🟧";
-      console.log(e.target.id)
-    }
-  });
-  
-  seaMap.addEventListener("mouseout", function (e) {
-  
-  renderMap()
-    if (e.target.innerHTML === "🟧") {
-      e.target.innerHTML = "🟦";
-    }
-  });
-}
-
-  
-  }
- // addEventListeners();
-  
-
 function renderPcBoardInContainer() {
   let mapUpdate2 = mapPlayerTwo.map;
   gameStart[1] = true;
   removeEventListeners()
-  console.log(mapUpdate2)
-
   for (let i = 0; i < mapUpdate2.length; i++) {
     for (let j = 0; j < mapUpdate2[i].length; j++) {
       const cell = document.createElement("div");
@@ -220,40 +191,6 @@ function renderPcBoardInContainer() {
     }
   }
 }
-
-seaMap2.addEventListener("click", function (e) {
-  if (e.target.innerHTML === "🟦") {
-    e.target.innerHTML = "🟧";
-    console.log(e.target.id)
-  }
-
-});
-
-seaMap2.addEventListener("mouseover", function (e) {
-  if (e.target.innerHTML === "🟦") {
-    e.target.innerHTML = "🟧";
-    console.log(e.target.id)
-  }
-}
-);
-
-seaMap2.addEventListener("mouseout", function (e) {
-  if (e.target.innerHTML === "🟧") {
-    e.target.innerHTML = "🟦";
-  }
-}
-);
-
-
-seaMap2.addEventListener("click", function (e) {
-  if (e.target.innerHTML !== "🟦" && e.target.innerHTML !== "🟧") {
-    e.target.innerHTML = "💣";//
-  } else {
-    e.target.innerHTML = "❌";
-  } if (e.target.innerHTML === "❌") {
-}
-);
-
 
 
 function renderBoardInContainer() {
@@ -271,10 +208,47 @@ function renderBoardInContainer() {
       seaMap.appendChild(cell);
     }
   }
-
 }
+  
 
 
+ let playerTurn = true
+
+  seaMap2.addEventListener("click", function (e) {
+    if (e.target.innerHTML === "🟦" && playerTurn ) {
+      e.target.innerHTML = "🟧";
+      swapTurns();
+ 
+    }else if (e.target.innerHTML !== "🟦" && e.target.innerHTML !== "🟧"  && playerTurn) {
+      e.target.innerHTML = "💣";
+      swapTurns();
+      console.log("clicked");
+    }
+    else {
+      setInterval(() => {
+        randomAttackMove ()
+        swapTurns();
+        console.log("playerTurn")
+        renderBoardInContainer()
+      }, 1000);
+    }
+  }
+  );
+
+
+  function swapTurns() {
+    playerTurn = !playerTurn;
+    console.log("swapped")
+    console.log(playerTurn)
+  }
+
+
+  function randomAttackMove () {
+    let row = Math.floor(Math.random() * 10);
+    let col = Math.floor(Math.random() * 10);
+    playerTwo.attack(mapPlayerOne, row, col)
+
+  }
 
 playerTwo.placeShipPc(mapPlayerTwo, playerTwo.ships[0], 0, 1, "vertical" );
 playerTwo.placeShipPc(mapPlayerTwo, playerTwo.ships[1], 6, 6, "horizontal" );
@@ -283,16 +257,5 @@ playerTwo.placeShipPc(mapPlayerTwo, playerTwo.ships[3],3, 2, "vertical" );
 playerTwo.placeShipPc(mapPlayerTwo, playerTwo.ships[4], 7, 7, "horizontal" );
 
 
-
-
-
-
-
-
-
-function pcPlaceShips() {
-
-
-}
 
 
